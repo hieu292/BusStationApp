@@ -10,7 +10,7 @@ export default function reducer(state={
             return {...state, fetching: true}
         }
         case "FETCH_ARRIVAL_BUS_REJECTED": {
-            return {...state, fetching: false, error: action.payload}
+            return {...state, fetched: true, fetching: false, error: action.payload}
         }
         case "FETCH_ARRIVAL_BUS_FULFILLED": {
             return {

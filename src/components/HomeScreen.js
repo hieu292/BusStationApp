@@ -3,7 +3,7 @@ import {
     StyleSheet,
     Text,
     TextInput,
-    TouchableHighlight,
+    TouchableOpacity,
     View
 } from 'react-native';
 import {Actions} from "react-native-router-flux";
@@ -19,16 +19,16 @@ class Home extends Component {
             var data = this.state.numberBus;
             Actions.selectScreen({data: data});
         } else {
-            Actions.error("Just enter number");
+            Actions.error("Just enter number greater than 0");
         }
     }
     _checkNumeric(text){
         var numberInput = Number(text);
         if(!isNaN(numberInput)){
-            this.state.numberBus = numberInput
+            this.state.numberBus = numberInput;
             return true;
         } else {
-            Actions.error("Just enter number");
+            Actions.error("Just enter number greater than 0");
             return false;
         }
         
@@ -42,10 +42,10 @@ class Home extends Component {
                 <TextInput
                     style={{height: 140, width: 200, borderWidth: 0}}
                     onChangeText={(text) => this._checkNumeric(text)}
-                />
-                <TouchableHighlight onPress={this._fetchSearchBus.bind(this)}>
-                    <Text>Search</Text>
-                </TouchableHighlight>
+                ><Text style={styles.text_input}>{this.state.numberBus}</Text></TextInput>
+                <TouchableOpacity style={styles.button_search} onPress={this._fetchSearchBus.bind(this)}>
+                    <Text style={styles.text_search}>Search</Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -62,7 +62,25 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
+    },
+    button_search: {
+        justifyContent: 'center',
+        marginTop: 30,
+        width:150,
+        height: 70,
+        borderWidth: 2,
+        borderColor: 'red'
+    },
+    text_search: {
+        color: '#e65c00',
+        textAlign: 'center',
+        fontSize: 30
+    },
+    text_input: {
+        fontSize:70,
+        color: '#ff9900'
     }
+
 });
 
 export default connect(state => ({

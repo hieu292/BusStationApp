@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Animated, Dimensions} from "react-native";
+import {View, Text, StyleSheet, Animated, Dimensions, TouchableOpacity} from "react-native";
 import {Actions} from "react-native-router-flux";
 
 var {
@@ -17,6 +17,23 @@ var styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    view: {
+        width:250,
+        height:250,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor:"white"
+    },
+    title: {
+        textAlign: 'center',
+        fontSize: 20,
+        color: 'red'
+    },
+    close_button:{
+        marginTop: 40,
+        textAlign: 'center',
+        color: '#ff9900'
+    }
 });
 
 export default class extends React.Component {
@@ -46,15 +63,11 @@ export default class extends React.Component {
         return (
             <Animated.View style={[styles.container, {backgroundColor:"rgba(52,52,52,0.5)"},
                                   {transform: [{translateY: this.state.offset}]}]}>
-                <View style={{  width:250,
-                                height:250,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                backgroundColor:"white" }}>
-                    <Text>{this.props.data}</Text>
-                    <TouchableHighlight onPress={this.closeModal.bind(this)}>
-                        <Text>Close</Text>
-                    </TouchableHighlight>
+                <View style={styles.view}>
+                    <Text style={styles.title}>{this.props.data}</Text>
+                    <TouchableOpacity  onPress={this.closeModal.bind(this)}>
+                        <Text style={styles.close_button}>Close</Text>
+                    </TouchableOpacity>
                 </View>
             </Animated.View>
         );
